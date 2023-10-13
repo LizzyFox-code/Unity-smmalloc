@@ -13,6 +13,7 @@ namespace SmMalloc.Allocator.Runtime
             unityAllocator.Register();
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Destroy(ref SmUnityAllocator allocator)
         {
             allocator.Unregister();
