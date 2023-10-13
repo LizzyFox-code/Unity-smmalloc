@@ -1,0 +1,22 @@
+{
+  "name": "com.lizzyfox-code.unity-smmalloc",
+  "version": "1.0.0",
+  "displayName": "Unity-smmalloc",
+  "description": "A smmalloc allocator version for Unity.",
+  "unity": "2022.3",
+  "unityRelease": "7f1",
+  "license": "MIT",
+  "dependencies": {
+    "com.unity.burst": "1.8.8",
+    "com.unity.collections": "2.1.4"
+  },
+  "keywords": [
+    "allocator",
+    "smmalloc",
+    "native",
+    "unity.collections",
+  ],
+  "author": {
+    "name": "LizzyFox",
+  }
+}
