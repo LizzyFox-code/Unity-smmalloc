@@ -8,15 +8,16 @@
   "license": "MIT",
   "dependencies": {
     "com.unity.burst": "1.8.8",
-    "com.unity.collections": "2.1.4",
+    "com.unity.collections": "2.1.4"
   },
   "keywords": [
     "allocator",
     "smmalloc",
     "native",
-    "unity.collections",
+    "unity.collections"
   ],
   "author": {
     "name": "LizzyFox",
+	"url" : "https://github.com/LizzyFox-code"
   }
 }
