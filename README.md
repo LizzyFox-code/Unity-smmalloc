@@ -7,8 +7,7 @@ Designed to speed up the typical memory allocation pattern in C++ such as many s
 This is a proxy allocator means that smmalloc handles only specific allocation sizes and pass-through all other allocations to generic heap allocator.
 
 ## Dependencies
-Unity Burst: 1.8.8
-Unity Collections: 2.1.4
+Unity Burst: 1.8.8 and Unity Collections: 2.1.4
 
 ## Usage
 #### Create a new allocator instance
