@@ -13,6 +13,11 @@ namespace SmMalloc.Allocator.Runtime
             unityAllocator.Register();
         }
 
+        public static SmAllocatorHelper Create(uint bucketsCount, long bucketSize, AllocatorManager.AllocatorHandle backingAllocator)
+        {
+            return new SmAllocatorHelper(bucketsCount, bucketSize, backingAllocator);
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Destroy(ref SmUnityAllocator allocator)
         {
