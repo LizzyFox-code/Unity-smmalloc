@@ -12,6 +12,7 @@
 
         public ref SmUnityAllocator Allocator => ref m_AllocatorHelper.Allocator;
 
+        [ExcludeFromBurstCompatTesting("CreateAllocator is unburstable")]
         public SmAllocatorHelper(uint bucketsCount, long bucketSize, AllocatorManager.AllocatorHandle backingAllocator)
         {
             m_AllocatorHelper = new AllocatorHelper<SmUnityAllocator>(backingAllocator);

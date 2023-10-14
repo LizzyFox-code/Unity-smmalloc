@@ -47,7 +47,7 @@ namespace SmMalloc.Allocator.Runtime
                 block.AllocatedItems = block.Range.Items;
 
                 if (block.Range.Pointer == IntPtr.Zero)
-                    return 1;
+                    return -1;
 
                 Interlocked.Increment(ref m_AllocationCount);
                 return 0;

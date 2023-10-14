@@ -1,6 +1,6 @@
 {
   "name": "com.lizzyfox-code.unity-smmalloc",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "displayName": "Unity-smmalloc",
   "description": "A smmalloc allocator version for Unity.",
   "unity": "2022.3",
