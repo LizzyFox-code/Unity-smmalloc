@@ -33,7 +33,7 @@ namespace SmMalloc.Allocator.Runtime
         
         public int AllocationCount => m_AllocationCount;
 
-        public SmUnityAllocator(ref SmAllocator smAllocator) : this()
+        public void Initialize(ref SmAllocator smAllocator)
         {
             m_SmAllocator = smAllocator;
         }

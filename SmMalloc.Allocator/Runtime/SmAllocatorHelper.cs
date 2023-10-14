@@ -1,38 +1,31 @@
 ﻿namespace SmMalloc.Allocator.Runtime
 {
     using System;
+    using System.Runtime.InteropServices;
     using Unity.Collections;
     using Unity.Collections.LowLevel.Unsafe;
 
     [GenerateTestsForBurstCompatibility]
-    public unsafe struct SmAllocatorHelper : IDisposable
+    [StructLayout(LayoutKind.Sequential)]
+    public struct SmAllocatorHelper : IDisposable
     {
-        private SmUnityAllocator* m_Allocator;
-        private AllocatorManager.AllocatorHandle m_BackingAllocator;
+        private AllocatorHelper<SmUnityAllocator> m_AllocatorHelper;
 
-        public ref SmUnityAllocator Allocator => ref UnsafeUtility.AsRef<SmUnityAllocator>(m_Allocator);
+        public ref SmUnityAllocator Allocator => ref m_AllocatorHelper.Allocator;
 
         public SmAllocatorHelper(uint bucketsCount, long bucketSize, AllocatorManager.AllocatorHandle backingAllocator)
         {
-            m_BackingAllocator = backingAllocator;
-            m_Allocator = (SmUnityAllocator*) UnsafeUtility.MallocTracked(UnsafeUtility.SizeOf<SmUnityAllocator>(),
-                UnsafeUtility.AlignOf<SmUnityAllocator>(), backingAllocator.ToAllocator, 0);
+            m_AllocatorHelper = new AllocatorHelper<SmUnityAllocator>(backingAllocator);
             
             var allocator = new SmAllocator(bucketsCount, bucketSize);
-            *m_Allocator = new SmUnityAllocator(ref allocator);
-            (*m_Allocator).Register();
+            Allocator.Initialize(ref allocator);
         }
         
         [ExcludeFromBurstCompatTesting("DestroyAllocator is unburstable")]
         public void Dispose()
         {
-            ref var allocator = ref UnsafeUtility.AsRef<SmUnityAllocator>(m_Allocator);
-            
-            allocator.Unregister();
-            allocator.Dispose();
-            
-            UnsafeUtility.Free(m_Allocator, m_BackingAllocator.ToAllocator);
-            m_Allocator = null;
+            Allocator.Dispose();
+            m_AllocatorHelper.Dispose();
         }
     }
 }

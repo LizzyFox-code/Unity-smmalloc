@@ -9,7 +9,8 @@ namespace SmMalloc.Allocator.Runtime
         public static void Create(uint bucketsCount, long bucketSize, out SmUnityAllocator unityAllocator)
         {
             var allocator = new SmAllocator(bucketsCount, bucketSize);
-            unityAllocator = new SmUnityAllocator(ref allocator);
+            unityAllocator = new SmUnityAllocator();
+            unityAllocator.Initialize(ref allocator);
             unityAllocator.Register();
         }
 
