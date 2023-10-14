@@ -56,7 +56,7 @@ namespace SmMalloc.Allocator.Runtime
             if (block.Range.Items > 0)
             {
                 block.Range.Pointer = m_SmAllocator.Realloc(block.Range.Pointer, block.Bytes, block.Alignment);
-                return block.Range.Pointer == IntPtr.Zero ? 1 : 0;
+                return block.Range.Pointer == IntPtr.Zero ? -1 : 0;
             }
 
             // Deallocate
