@@ -3,7 +3,6 @@
     using System;
     using System.Runtime.InteropServices;
     using Unity.Collections;
-    using Unity.Collections.LowLevel.Unsafe;
 
     [GenerateTestsForBurstCompatibility]
     [StructLayout(LayoutKind.Sequential)]

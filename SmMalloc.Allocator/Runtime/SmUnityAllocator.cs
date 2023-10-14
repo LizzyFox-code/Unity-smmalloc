@@ -4,6 +4,7 @@ namespace SmMalloc.Allocator.Runtime
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Threading;
     using AOT;
     using Unity.Burst;
     using Unity.Collections;
@@ -47,8 +48,8 @@ namespace SmMalloc.Allocator.Runtime
 
                 if (block.Range.Pointer == IntPtr.Zero)
                     return 1;
-                
-                m_AllocationCount++;
+
+                Interlocked.Increment(ref m_AllocationCount);
                 return 0;
             }
 
@@ -61,8 +62,8 @@ namespace SmMalloc.Allocator.Runtime
             // Deallocate
             m_SmAllocator.Free(block.Range.Pointer);
             block.Range.Pointer = IntPtr.Zero;
-            m_AllocationCount--;
-            
+
+            Interlocked.Decrement(ref m_AllocationCount);
             return 0;
         }
         
