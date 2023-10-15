@@ -2,6 +2,7 @@ namespace SmMalloc.Allocator.Runtime
 {
     using System.Runtime.CompilerServices;
     using Unity.Collections;
+    using Unity.Jobs;
 
     public static class SmAllocatorUtility
     {
@@ -38,6 +39,17 @@ namespace SmMalloc.Allocator.Runtime
         public static void DisposeArray<T>(ref NativeArray<T> array) where T : unmanaged
         {
             CollectionHelper.Dispose(array);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static JobHandle DisposeArray<T>(ref NativeArray<T> array, JobHandle dependsOn) where T : unmanaged
+        {
+            var disposeJob = new DisposeArrayJob<T>
+            {
+                Array = array
+            };
+
+            return disposeJob.ScheduleByRef(dependsOn);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
